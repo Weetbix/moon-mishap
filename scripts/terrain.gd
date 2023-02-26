@@ -13,24 +13,6 @@ var TERRAIN_X_SPACING = 10
 var TERRAIN_HEIGHT = 400.0
 var TERRAIN_Y_BASIS: float = 100.0
 
-func smooth_y_values(points: Array):
-	var smoothedPoints = PackedVector2Array()
-
-	# Smooth the y values of the points using a weighted average
-	for i in range(0, points.size()):
-		# Get the y value of the current point
-		var y = points[i].y
-
-		# Calculate the weighted average of the y value
-		if i > 0 and i < points.size() - 1:
-			y = (points[i - 1].y + 2 * points[i].y + points[i + 1].y) / 4
-
-		# Add the smoothed point to the list of smoothed points
-		smoothedPoints.append(Vector2(points[i].x, y))
-
-	return smoothedPoints
-
-
 func match_line_to_collision():
 	line.clear_points()
 	line.position = collision.position
@@ -38,18 +20,23 @@ func match_line_to_collision():
 	line.add_point(collision.polygon[0])
 
 func generate_collision_polygon():
+	var noise = FastNoiseLite.new()  # Noise object for generating terrain
+	var amplitude = 100  # Maximum height of the terrain
+	noise.seed = randi()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.frequency = 0.07
+
 	var polygon = PackedVector2Array()
-	for i in range(TERRAIN_X_POINTS + 1):
-		polygon.append(Vector2(i * TERRAIN_X_SPACING, randi_range(-100, 100)))
-		# polygon.append(Vector2(rand_range(-1, 1), rand_range(-1, 1)))
-		# polygon.append(Vector2(i * TERRAIN_X_SPACING, 0))
+	for x in range(TERRAIN_X_POINTS + 1):
+		var height_value = noise.get_noise_2d(x, 0)
+		polygon.append(Vector2(x * TERRAIN_X_SPACING, height_value * amplitude))
 	
 	polygon.append(Vector2(TERRAIN_X_POINTS * TERRAIN_X_SPACING, TERRAIN_HEIGHT))
 	polygon.append(Vector2(0, TERRAIN_HEIGHT))
 	return polygon
 
 func generate():
-	collision.polygon = smooth_y_values(smooth_y_values(generate_collision_polygon()))
+	collision.polygon = generate_collision_polygon()
 	collision.position = Vector2(
 		float(-(TERRAIN_X_POINTS * TERRAIN_X_SPACING)/2.0),
 		float(TERRAIN_Y_BASIS)
