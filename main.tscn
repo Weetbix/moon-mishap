@@ -9,12 +9,12 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="RidigBody2D" type="RigidBody2D" parent="."]
 script = ExtResource("1_7mwlq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RidigBody2D"]
 shape = SubResource("CircleShape2D_8ruki")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="RidigBody2D"]
 texture_filter = 1
 texture = ExtResource("1_l8kmw")
