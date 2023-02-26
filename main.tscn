@@ -10,37 +10,27 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="RidigBody2D" type="RigidBody2D" parent="."]
+[node name="Player" type="RigidBody2D" parent="."]
 script = ExtResource("1_7mwlq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RidigBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_8ruki")
 
-[node name="Sprite2D" type="Sprite2D" parent="RidigBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture_filter = 1
 texture = ExtResource("1_l8kmw")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(16, 18, 44, 19, 97, 10, 145, 28, 221, 28, 247, 13, 288, 13, 337, 7, 352, 56, 338, 256, -361, 251, -350, -2, -306, -25, -278, -20, -267, -8, -255, 16, -255, 62, -235, 79, -208, 82, -185, 79, -158, 79, -127, 63, -105, 56, -80, 40, -65, 35, -34, 35, -15, 31)
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-123, 83, -104, 149, -50, 147, -48, 86)
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(52, 38, 123, 38, 163, 97, 82, 145, -18, 137, 10, 51, 69, -29, -15, -93)
-width = 1.0
-
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Terrain" type="Node2D" parent="."]
 script = ExtResource("3_37qgm")
 
-[node name="line" type="Line2D" parent="Node2D"]
-position = Vector2(44, 38)
-points = PackedVector2Array(0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160, 0, 170, 0, 180, 0, 190, 0, 200, 0, 210, 0, 220, 0, 230, 0, 240, 0, 250, 0, 260, 0, 270, 0, 280, 0, 290, 0, 300, 400, 0, 400, 0, 0)
+[node name="line" type="Line2D" parent="Terrain"]
+position = Vector2(-325, 100)
+points = PackedVector2Array(0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160, 0, 170, 0, 180, 0, 190, 0, 200, 0, 210, 0, 220, 0, 230, 0, 240, 0, 250, 0, 260, 0, 270, 0, 280, 0, 290, 0, 300, 0, 310, 0, 320, 0, 330, 0, 340, 0, 350, 0, 360, 0, 370, 0, 380, 0, 390, 0, 400, 0, 410, 0, 420, 0, 430, 0, 440, 0, 450, 0, 460, 0, 470, 0, 480, 0, 490, 0, 500, 0, 510, 0, 520, 0, 530, 0, 540, 0, 550, 0, 560, 0, 570, 0, 580, 0, 590, 0, 600, 0, 610, 0, 620, 0, 630, 0, 640, 0, 650, 0, 650, 400, 0, 400, 0, 0)
 width = 1.0
 
-[node name="collision" type="CollisionPolygon2D" parent="Node2D"]
-position = Vector2(44, 38)
-polygon = PackedVector2Array(0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160, 0, 170, 0, 180, 0, 190, 0, 200, 0, 210, 0, 220, 0, 230, 0, 240, 0, 250, 0, 260, 0, 270, 0, 280, 0, 290, 0, 300, 400, 0, 400)
+[node name="static-body" type="StaticBody2D" parent="Terrain"]
+visible = false
+
+[node name="collision" type="CollisionPolygon2D" parent="Terrain/static-body"]
+position = Vector2(-325, 100)
+polygon = PackedVector2Array(0, 0, 10, 0, 20, 0, 30, 0, 40, 0, 50, 0, 60, 0, 70, 0, 80, 0, 90, 0, 100, 0, 110, 0, 120, 0, 130, 0, 140, 0, 150, 0, 160, 0, 170, 0, 180, 0, 190, 0, 200, 0, 210, 0, 220, 0, 230, 0, 240, 0, 250, 0, 260, 0, 270, 0, 280, 0, 290, 0, 300, 0, 310, 0, 320, 0, 330, 0, 340, 0, 350, 0, 360, 0, 370, 0, 380, 0, 390, 0, 400, 0, 410, 0, 420, 0, 430, 0, 440, 0, 450, 0, 460, 0, 470, 0, 480, 0, 490, 0, 500, 0, 510, 0, 520, 0, 530, 0, 540, 0, 550, 0, 560, 0, 570, 0, 580, 0, 590, 0, 600, 0, 610, 0, 620, 0, 630, 0, 640, 0, 650, 0, 650, 400, 0, 400)
