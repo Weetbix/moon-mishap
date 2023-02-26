@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+@onready var flame: Node2D = get_node("./flame")
+
 const ROTATE_SPEED = 30
 const THRUST_AMOUNT = 40
 
@@ -14,3 +16,8 @@ func _physics_process(_delta):
 	var thruster_amount = Input.get_action_strength("thruster")
 	var thrust = Vector2(0, -THRUST_AMOUNT) * thruster_amount
 	apply_force(thrust.rotated(rotation))
+
+	if thruster_amount <= 0:
+		flame.visible = false
+	else:
+		flame.visible = true
