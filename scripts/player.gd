@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const ROTATE_SPEED = 100
+const ROTATE_SPEED = 30
 const THRUST_AMOUNT = 40
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
