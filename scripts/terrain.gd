@@ -8,6 +8,10 @@ extends Node2D
 	set(val):
 		generate()
 
+@export var noise_amplitude: float = 100.0
+@export var noise_frequency: float = 0.08
+@export var noise_type: FastNoiseLite.NoiseType = FastNoiseLite.TYPE_SIMPLEX
+
 var TERRAIN_X_POINTS = 65
 var TERRAIN_X_SPACING = 10
 var TERRAIN_HEIGHT = 400.0
@@ -21,15 +25,14 @@ func match_line_to_collision():
 
 func generate_collision_polygon():
 	var noise = FastNoiseLite.new()  # Noise object for generating terrain
-	var amplitude = 100  # Maximum height of the terrain
 	noise.seed = randi()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
-	noise.frequency = 0.07
+	noise.noise_type = noise_type
+	noise.frequency = noise_frequency
 
 	var polygon = PackedVector2Array()
 	for x in range(TERRAIN_X_POINTS + 1):
 		var height_value = noise.get_noise_2d(x, 0)
-		polygon.append(Vector2(x * TERRAIN_X_SPACING, height_value * amplitude))
+		polygon.append(Vector2(x * TERRAIN_X_SPACING, height_value * noise_amplitude))
 	
 	polygon.append(Vector2(TERRAIN_X_POINTS * TERRAIN_X_SPACING, TERRAIN_HEIGHT))
 	polygon.append(Vector2(0, TERRAIN_HEIGHT))
