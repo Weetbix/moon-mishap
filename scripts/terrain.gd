@@ -4,6 +4,7 @@ extends Node2D
 @onready var line: Line2D = get_node("./line")
 @onready var collision: CollisionPolygon2D = get_node("./static-body/collision")
 
+# Generate terrain when hitting the "do toggle" checkbox
 @export var do_generate: bool = false:
 	set(val):
 		generate()
@@ -46,10 +47,8 @@ func generate():
 	)
 	match_line_to_collision()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	generate()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
