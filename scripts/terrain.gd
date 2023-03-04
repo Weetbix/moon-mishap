@@ -44,13 +44,27 @@ func find_smoothest_point(points: PackedVector2Array):
 	var smoothest_index = 1
 	var smoothest_value = 10000
 
-	for i in range(1, points.size() -1):
+	for i in range(1, points.size() -3):
 		var difference_in_neighours = abs(points[i].y - points[i-1].y) + abs(points[i].y - points[i+1].y)
 		if difference_in_neighours < smoothest_value:
 			smoothest_index = i
 			smoothest_value = difference_in_neighours
 	
 	return smoothest_index
+
+func find_jankiest_point(points: PackedVector2Array):
+	var jankiest_index = 1
+	var jankiest_value = -1000
+
+	for i in range(1, points.size() -3):
+		# Jank value is like deep caves, so lets find the point where the height difference
+		# of both neighbours adds up to the most
+		var jank_amount = (points[i-1].y + points[i].y) + (points[i+1].y + points[i].y)
+		if jank_amount > jankiest_value:
+			jankiest_index = i
+			jankiest_value = jank_amount
+	
+	return jankiest_index
 
 func make_neighbours_flat(points: PackedVector2Array, index: int):
 	points[index-1].y = points[index].y
@@ -60,13 +74,13 @@ func remove_all_platforms():
 	for child in platforms.get_children():
 		platforms.remove_child(child)
 
-func create_platform(terrain: PackedVector2Array, index: int):
+func create_platform(terrain: PackedVector2Array, index: int, color: Color):
 	var platform_line = Line2D.new()
 	platform_line.points = [
 		terrain[index-1], 
 		terrain[index+1]
 	]
-	platform_line.default_color = Color(0, 1, 0)
+	platform_line.default_color = color
 	platform_line.width = 1
 	platforms.add_child(platform_line)
 
@@ -74,9 +88,15 @@ func generate():
 	var terrain_array = generate_collision_polygon();
 
 	var smoothest_point = find_smoothest_point(terrain_array)
+	var jankiest_point = find_jankiest_point(terrain_array)
+
 	make_neighbours_flat(
 		terrain_array,
 		smoothest_point
+	)
+	make_neighbours_flat(
+		terrain_array,
+		jankiest_point
 	)
 
 	collision.polygon = terrain_array
@@ -85,7 +105,8 @@ func generate():
 		float(TERRAIN_Y_BASIS)
 	)
 	remove_all_platforms()
-	create_platform(collision.polygon, smoothest_point)
+	create_platform(collision.polygon, smoothest_point, Color(0,1,0))
+	create_platform(collision.polygon, jankiest_point, Color(1,0,0))
 	match_line_to_collision()
 
 func _ready():
@@ -93,5 +114,6 @@ func _ready():
 		generate()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("debug_generate_terrain"):
-		generate()
+	if not Engine.is_editor_hint():
+		if Input.is_action_just_pressed("debug_generate_terrain"):
+			generate()
