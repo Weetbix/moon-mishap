@@ -1,6 +1,6 @@
 extends Node2D
 
-var MIN_STARS = 5
+var MIN_STARS = 10
 var MAX_STARS = 15
 
 # Called when the node enters the scene tree for the first time.

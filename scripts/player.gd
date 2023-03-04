@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-@onready var flame: Node2D = get_node("./flame")
-@onready var particles: GPUParticles2D = get_node("./particles")
+@onready var flame: Node2D = $flame
+@onready var particles: GPUParticles2D = $particles
 
 const ROTATE_SPEED = 30
 const THRUST_AMOUNT = 40

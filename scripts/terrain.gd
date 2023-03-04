@@ -1,11 +1,11 @@
 @tool
 extends Node2D
 
-@onready var line: Line2D = get_node("./line")
-@onready var collision: CollisionPolygon2D = get_node("./static-body/collision")
-@onready var polygon: Polygon2D = get_node("./static-body/polygon")
-@onready var particle_collider: LightOccluder2D = get_node("./particle-collider")
-@onready var platforms: Node = get_node("./platforms")
+@onready var line: Line2D = $line
+@onready var collision: CollisionPolygon2D = $static_body/collision
+@onready var polygon: Polygon2D = $static_body/polygon
+@onready var particle_collider: LightOccluder2D = $particle_collider
+@onready var platforms: Node = $platforms
 
 # Generate terrain when hitting the "do toggle" checkbox
 @export var do_generate: bool = false:
