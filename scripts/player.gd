@@ -24,7 +24,7 @@ func warp_when_offscreen():
 func _physics_process(_delta):
 	warp_when_offscreen()
 
-	oxygen -= OXYGEN_REDUCTION_PER_FRAME
+	oxygen = max(0, oxygen - OXYGEN_REDUCTION_PER_FRAME)
 
 	# Rotation
 	var rotate_amount = Input.get_action_strength("rotate-left") - Input.get_action_strength("rotate-right")
