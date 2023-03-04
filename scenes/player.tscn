@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfhnv54mktux4"]
+[gd_scene load_steps=8 format=3 uid="uid://bfhnv54mktux4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k0q34"]
 [ext_resource type="Texture2D" uid="uid://dcnbiibr6lucf" path="res://images/lander.png" id="2_wow2q"]
 [ext_resource type="SpriteFrames" uid="uid://cqoyonxh03lys" path="res://images/flame.res" id="3_16rsr"]
+[ext_resource type="Texture2D" uid="uid://b6hk01034qmvp" path="res://images/lander-hd.png" id="4_cfgt2"]
 
 [sub_resource type="Gradient" id="Gradient_5a623"]
 offsets = PackedFloat32Array(0.266075, 0.292683)
@@ -38,10 +39,13 @@ randomness = 0.3
 trail_lifetime = 0.24
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("2_wow2q")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-2.08165e-12, -2.08165e-12)
 polygon = PackedVector2Array(-2, -6, 2, -6, 4, -4, 4, 4, 5, 5, 5, 7, 6, 7, 6, 8, 3, 8, 3, 7, 4, 7, 4, 5, -4, 5, -4, 7, -3, 7, -3, 8, -6, 8, -6, 7, -5, 7, -5, 5, -4, 4, -4, -4)
 
 [node name="flame" type="AnimatedSprite2D" parent="."]
@@ -58,3 +62,9 @@ metadata/_aseprite_wizard_config_ = {
 "op_exp": false,
 "source": "res://images/flame.ase"
 }
+
+[node name="Sprite2DHD" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2.08165e-12, -2.08165e-12)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_cfgt2")
