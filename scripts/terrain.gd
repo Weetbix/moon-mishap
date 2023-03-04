@@ -4,6 +4,7 @@ extends Node2D
 @onready var line: Line2D = get_node("./line")
 @onready var collision: CollisionPolygon2D = get_node("./static-body/collision")
 @onready var polygon: Polygon2D = get_node("./static-body/polygon")
+@onready var particle_collider: LightOccluder2D = get_node("./particle-collider")
 @onready var platforms: Node = get_node("./platforms")
 
 # Generate terrain when hitting the "do toggle" checkbox
@@ -102,6 +103,7 @@ func generate():
 
 	collision.polygon = terrain_array
 	polygon.polygon = terrain_array
+	particle_collider.occluder.polygon = terrain_array
 	position = Vector2(
 		0,
 		float(TERRAIN_Y_BASIS)
