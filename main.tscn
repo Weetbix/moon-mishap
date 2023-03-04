@@ -1,110 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bolbgsnn7j42j"]
+[gd_scene load_steps=4 format=3 uid="uid://bolbgsnn7j42j"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_7mwlq"]
-[ext_resource type="Texture2D" uid="uid://dcnbiibr6lucf" path="res://images/lander.png" id="1_l8kmw"]
-[ext_resource type="Script" path="res://scripts/terrain.gd" id="3_37qgm"]
-[ext_resource type="SpriteFrames" uid="uid://cqoyonxh03lys" path="res://images/flame.res" id="3_cktba"]
-[ext_resource type="Script" path="res://scripts/stars.gd" id="5_vhcyi"]
-
-[sub_resource type="Gradient" id="Gradient_5a623"]
-offsets = PackedFloat32Array(0.266075, 0.292683)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_joa31"]
-gradient = SubResource("Gradient_5a623")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6guh8"]
-emission_shape = 1
-emission_sphere_radius = 3.0
-particle_flag_disable_z = true
-direction = Vector3(2.08165e-12, 1, 2.08165e-12)
-spread = 12.0
-gravity = Vector3(2.08165e-12, 9, 2.08165e-12)
-initial_velocity_min = 30.0
-initial_velocity_max = 45.0
-orbit_velocity_min = 2.08167e-14
-orbit_velocity_max = 2.08167e-14
-color_ramp = SubResource("GradientTexture1D_joa31")
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.6
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3gj7o"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0l514"]
-polygon = PackedVector2Array(0, 0, 10, -6.00613, 20, -9.33129, 30, -5.30004, 40, -4.38125, 50, 1.14152, 60, -9.37528, 70, -8.69259, 80, -38.5088, 90, -45.7899, 100, -41.974, 110, -46.7523, 120, -27.7834, 130, -4.17463, 140, 16.4508, 150, 6.38585, 160, -2.24932, 170, -5.1178, 180, 2.18145, 190, 7.04021, 200, -9.24105, 210, 7.60128, 220, 25.1914, 230, 14.6718, 240, 11.357, 250, 13.8302, 260, 6.70188, 270, 17.2811, 280, 21.2042, 290, 11.2841, 300, 0.42655, 310, 12.0248, 320, 32.6627, 330, 27.942, 340, 27.942, 350, 27.942, 360, 20.589, 370, 1.7802, 380, -0.161201, 390, -14.2472, 400, -41.0304, 410, -43.3178, 420, -30.3552, 430, -6.52115, 440, -8.95048, 450, 4.55364, 460, 10.5526, 470, 19.8475, 480, 16.0196, 490, 25.4941, 500, 17.2465, 510, 37.2738, 520, 37.2738, 530, 37.2738, 540, 32.5135, 550, 27.2521, 560, 17.9391, 570, 18.826, 580, -13.0423, 590, -18.3219, 600, -21.9472, 610, -43.1149, 620, -38.4684, 630, -22.9561, 640, -1.52412, 650, 6.11324, 650, 400, 0, 400)
+[ext_resource type="PackedScene" uid="uid://bfhnv54mktux4" path="res://scenes/player.tscn" id="1_46kws"]
+[ext_resource type="PackedScene" uid="uid://drm7mhg74vhl7" path="res://scenes/terrain.tscn" id="2_w28ui"]
+[ext_resource type="PackedScene" uid="uid://c0w5qdlm0gr7u" path="res://scenes/stars.tscn" id="3_ro7l6"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="Player" type="RigidBody2D" parent="."]
-position = Vector2(74, 75)
-script = ExtResource("1_7mwlq")
+[node name="Player" parent="." instance=ExtResource("1_46kws")]
+position = Vector2(81, 77)
 
-[node name="particles" type="GPUParticles2D" parent="Player"]
-position = Vector2(0, 8)
-process_material = SubResource("ParticleProcessMaterial_6guh8")
-lifetime = 0.3
-randomness = 0.3
-trail_lifetime = 0.24
+[node name="Terrain" parent="." instance=ExtResource("2_w28ui")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture_filter = 1
-texture = ExtResource("1_l8kmw")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
-polygon = PackedVector2Array(-2, -6, 2, -6, 4, -4, 4, 4, 5, 5, 5, 7, 6, 7, 6, 8, 3, 8, 3, 7, 4, 7, 4, 5, -4, 5, -4, 7, -3, 7, -3, 8, -6, 8, -6, 7, -5, 7, -5, 5, -4, 4, -4, -4)
-
-[node name="flame" type="AnimatedSprite2D" parent="Player"]
-texture_filter = 1
-position = Vector2(0, 13)
-sprite_frames = ExtResource("3_cktba")
-autoplay = "default"
-metadata/_aseprite_wizard_config_ = {
-"layer": "thruster",
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"op_exp": false,
-"source": "res://images/flame.ase"
-}
-
-[node name="Terrain" type="Node2D" parent="."]
-position = Vector2(0, 300)
-script = ExtResource("3_37qgm")
-noise_amplitude = 80.0
-noise_frequency = 0.07
-
-[node name="line" type="Line2D" parent="Terrain"]
-z_index = 1
-position = Vector2(2.08165e-12, 2.08165e-12)
-points = PackedVector2Array(0, 0, 10, -6.00613, 20, -9.33129, 30, -5.30004, 40, -4.38125, 50, 1.14152, 60, -9.37528, 70, -8.69259, 80, -38.5088, 90, -45.7899, 100, -41.974, 110, -46.7523, 120, -27.7834, 130, -4.17463, 140, 16.4508, 150, 6.38585, 160, -2.24932, 170, -5.1178, 180, 2.18145, 190, 7.04021, 200, -9.24105, 210, 7.60128, 220, 25.1914, 230, 14.6718, 240, 11.357, 250, 13.8302, 260, 6.70188, 270, 17.2811, 280, 21.2042, 290, 11.2841, 300, 0.42655, 310, 12.0248, 320, 32.6627, 330, 27.942, 340, 27.942, 350, 27.942, 360, 20.589, 370, 1.7802, 380, -0.161201, 390, -14.2472, 400, -41.0304, 410, -43.3178, 420, -30.3552, 430, -6.52115, 440, -8.95048, 450, 4.55364, 460, 10.5526, 470, 19.8475, 480, 16.0196, 490, 25.4941, 500, 17.2465, 510, 37.2738, 520, 37.2738, 530, 37.2738, 540, 32.5135, 550, 27.2521, 560, 17.9391, 570, 18.826, 580, -13.0423, 590, -18.3219, 600, -21.9472, 610, -43.1149, 620, -38.4684, 630, -22.9561, 640, -1.52412, 650, 6.11324, 650, 400, 0, 400, 0, 0)
-width = 1.0
-
-[node name="static-body" type="StaticBody2D" parent="Terrain"]
-
-[node name="collision" type="CollisionPolygon2D" parent="Terrain/static-body"]
-visible = false
-material = SubResource("CanvasItemMaterial_3gj7o")
-position = Vector2(2.08165e-12, 2.08165e-12)
-polygon = PackedVector2Array(0, 0, 10, -6.00613, 20, -9.33129, 30, -5.30004, 40, -4.38125, 50, 1.14152, 60, -9.37528, 70, -8.69259, 80, -38.5088, 90, -45.7899, 100, -41.974, 110, -46.7523, 120, -27.7834, 130, -4.17463, 140, 16.4508, 150, 6.38585, 160, -2.24932, 170, -5.1178, 180, 2.18145, 190, 7.04021, 200, -9.24105, 210, 7.60128, 220, 25.1914, 230, 14.6718, 240, 11.357, 250, 13.8302, 260, 6.70188, 270, 17.2811, 280, 21.2042, 290, 11.2841, 300, 0.42655, 310, 12.0248, 320, 32.6627, 330, 27.942, 340, 27.942, 350, 27.942, 360, 20.589, 370, 1.7802, 380, -0.161201, 390, -14.2472, 400, -41.0304, 410, -43.3178, 420, -30.3552, 430, -6.52115, 440, -8.95048, 450, 4.55364, 460, 10.5526, 470, 19.8475, 480, 16.0196, 490, 25.4941, 500, 17.2465, 510, 37.2738, 520, 37.2738, 530, 37.2738, 540, 32.5135, 550, 27.2521, 560, 17.9391, 570, 18.826, 580, -13.0423, 590, -18.3219, 600, -21.9472, 610, -43.1149, 620, -38.4684, 630, -22.9561, 640, -1.52412, 650, 6.11324, 650, 400, 0, 400)
-
-[node name="polygon" type="Polygon2D" parent="Terrain/static-body"]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, 0, 10, -6.00613, 20, -9.33129, 30, -5.30004, 40, -4.38125, 50, 1.14152, 60, -9.37528, 70, -8.69259, 80, -38.5088, 90, -45.7899, 100, -41.974, 110, -46.7523, 120, -27.7834, 130, -4.17463, 140, 16.4508, 150, 6.38585, 160, -2.24932, 170, -5.1178, 180, 2.18145, 190, 7.04021, 200, -9.24105, 210, 7.60128, 220, 25.1914, 230, 14.6718, 240, 11.357, 250, 13.8302, 260, 6.70188, 270, 17.2811, 280, 21.2042, 290, 11.2841, 300, 0.42655, 310, 12.0248, 320, 32.6627, 330, 27.942, 340, 27.942, 350, 27.942, 360, 20.589, 370, 1.7802, 380, -0.161201, 390, -14.2472, 400, -41.0304, 410, -43.3178, 420, -30.3552, 430, -6.52115, 440, -8.95048, 450, 4.55364, 460, 10.5526, 470, 19.8475, 480, 16.0196, 490, 25.4941, 500, 17.2465, 510, 37.2738, 520, 37.2738, 530, 37.2738, 540, 32.5135, 550, 27.2521, 560, 17.9391, 570, 18.826, 580, -13.0423, 590, -18.3219, 600, -21.9472, 610, -43.1149, 620, -38.4684, 630, -22.9561, 640, -1.52412, 650, 6.11324, 650, 400, 0, 400)
-
-[node name="platforms" type="Node2D" parent="Terrain"]
-z_index = 10
-
-[node name="particle-collider" type="LightOccluder2D" parent="Terrain"]
-position = Vector2(0, 2.08165e-12)
-occluder = SubResource("OccluderPolygon2D_0l514")
-
-[node name="Stars" type="Node2D" parent="."]
-z_index = -1
-script = ExtResource("5_vhcyi")
-
-[node name="Line2D" type="Line2D" parent="Stars"]
-points = PackedVector2Array(-43, 55)
+[node name="Stars" parent="." instance=ExtResource("3_ro7l6")]
