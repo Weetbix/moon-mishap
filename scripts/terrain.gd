@@ -48,7 +48,8 @@ func generate():
 	match_line_to_collision()
 
 func _ready():
-	generate()
+	if not Engine.is_editor_hint():
+		generate()
 
 func _process(_delta):
 	pass
