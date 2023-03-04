@@ -18,7 +18,7 @@ extends Node2D
 var TERRAIN_X_POINTS = 65
 var TERRAIN_X_SPACING = 10
 var TERRAIN_HEIGHT = 400.0
-var TERRAIN_Y_BASIS: float = 100.0
+var TERRAIN_Y_BASIS: float = 300.0
 
 func match_line_to_collision():
 	line.clear_points()
@@ -103,7 +103,7 @@ func generate():
 	collision.polygon = terrain_array
 	polygon.polygon = terrain_array
 	position = Vector2(
-		float(-(TERRAIN_X_POINTS * TERRAIN_X_SPACING)/2.0),
+		0,
 		float(TERRAIN_Y_BASIS)
 	)
 	remove_all_platforms()
