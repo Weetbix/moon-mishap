@@ -10,11 +10,6 @@ signal platform_created(position: Vector2, difficulty: float)
 @onready var particle_collider: LightOccluder2D = $particle_collider
 @onready var platforms: Node = $platforms
 
-# Generate terrain when hitting the "do toggle" checkbox
-@export var do_generate: bool = false:
-	set(val):
-		generate()
-
 @export var noise_amplitude: float = 100.0
 @export var noise_frequency: float = 0.08
 @export var noise_type: FastNoiseLite.NoiseType = FastNoiseLite.TYPE_SIMPLEX

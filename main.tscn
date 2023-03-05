@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bolbgsnn7j42j"]
+[gd_scene load_steps=6 format=3 uid="uid://bolbgsnn7j42j"]
 
 [ext_resource type="PackedScene" uid="uid://bfhnv54mktux4" path="res://scenes/player.tscn" id="1_46kws"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ktw1e"]
 [ext_resource type="PackedScene" uid="uid://dgkfubs563rvd" path="res://scenes/ui.tscn" id="2_ng0g3"]
 [ext_resource type="PackedScene" uid="uid://drm7mhg74vhl7" path="res://scenes/terrain.tscn" id="2_w28ui"]
 [ext_resource type="PackedScene" uid="uid://c0w5qdlm0gr7u" path="res://scenes/stars.tscn" id="3_ro7l6"]
-[ext_resource type="PackedScene" uid="uid://dsijswbbyrigf" path="res://scenes/landing_pad.tscn" id="6_t3i4h"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ktw1e")
@@ -21,6 +20,3 @@ position = Vector2(81, 77)
 [node name="Terrain" parent="." instance=ExtResource("2_w28ui")]
 
 [node name="Stars" parent="." instance=ExtResource("3_ro7l6")]
-
-[node name="LandingPad" parent="." instance=ExtResource("6_t3i4h")]
-position = Vector2(341, 126)
