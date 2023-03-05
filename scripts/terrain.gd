@@ -114,8 +114,3 @@ func generate():
 	platform_created.emit(position + terrain_array[jankiest_point], 2.0)
 
 	match_line_to_collision()
-
-func _process(_delta):
-	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("debug_generate_terrain"):
-			generate()

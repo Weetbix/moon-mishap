@@ -38,3 +38,8 @@ func _ready():
 		player.fuel_changed.connect(ui.updateFuel)
 		player.oxygen_changed.connect(ui.updateOxygen)
 		generate_level()
+
+func _process(delta):
+	if not Engine.is_editor_hint():
+		if Input.is_action_just_pressed("debug_generate_level"):
+			generate_level()
