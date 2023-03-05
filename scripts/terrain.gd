@@ -2,6 +2,8 @@
 extends Node2D
 class_name Terrain
 
+signal platform_created(position: Vector2, difficulty: float)
+
 @onready var line: Line2D = $line
 @onready var collision: CollisionPolygon2D = $static_body/collision
 @onready var polygon: Polygon2D = $static_body/polygon
@@ -109,14 +111,14 @@ func generate():
 		0,
 		float(TERRAIN_Y_BASIS)
 	)
+
 	remove_all_platforms()
 	create_platform(collision.polygon, smoothest_point, Color(0,1,0))
 	create_platform(collision.polygon, jankiest_point, Color(1,0,0))
-	match_line_to_collision()
+	platform_created.emit(position + terrain_array[smoothest_point], 1.0)
+	platform_created.emit(position + terrain_array[jankiest_point], 2.0)
 
-func _ready():
-	if not Engine.is_editor_hint():
-		generate()
+	match_line_to_collision()
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
