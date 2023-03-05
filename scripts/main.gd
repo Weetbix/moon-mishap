@@ -13,10 +13,9 @@ var landing_pad = preload("res://scenes/landing_pad.tscn")
 		generate_level()
 
 func delete_all_platforms():
-	pass
-	# var platforms = get_tree().get_nodes_in_group('platforms')
-	# for platform in platforms:
-	# 	platform.queue_free()
+	var platforms = get_tree().get_nodes_in_group('platforms')
+	for platform in platforms:
+		platform.queue_free()
 
 func place_platform(position: Vector2, difficulty):
 	print(position)
