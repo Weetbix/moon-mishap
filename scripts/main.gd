@@ -27,6 +27,7 @@ func place_platform(position: Vector2, difficulty):
 func generate_level():
 	delete_all_platforms()
 	terrain.generate()
+	player.reset_resources()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

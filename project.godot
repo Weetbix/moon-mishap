@@ -50,6 +50,10 @@ debug_generate_level={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="platforms"
+
 [physics]
 
 2d/default_gravity=9.0

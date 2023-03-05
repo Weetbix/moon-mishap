@@ -1,10 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsijswbbyrigf"]
+[gd_scene load_steps=4 format=3 uid="uid://dsijswbbyrigf"]
+
+[ext_resource type="Script" path="res://scripts/landing_pad.gd" id="1_v4w8e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbjf8"]
 
-[node name="Area2D" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmhmb"]
+size = Vector2(6, 4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_v4w8e")
+
+[node name="Guide" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_dbjf8")
+disabled = true
 debug_color = Color(0.835294, 0.254902, 0.729412, 0.419608)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_hmhmb")
+debug_color = Color(0.639216, 0.513726, 0.27451, 0.419608)
+
+[node name="LandingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="LandingTimer" to="." method="_on_landing_timer_timeout"]

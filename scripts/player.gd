@@ -7,10 +7,13 @@ class_name Player
 const ROTATE_SPEED = 30
 const THRUST_AMOUNT = 40
 
+const FUEL_INITIAL_VALUE = 100
+const OXYGEN_INITIAL_VALUE = 100
 const FUEL_REDUCTION_PER_FRAME : float = 0.1
 const OXYGEN_REDUCTION_PER_FRAME : float = 0.03
-var fuel = 100
-var oxygen = 100
+
+var fuel = FUEL_INITIAL_VALUE
+var oxygen = OXYGEN_INITIAL_VALUE
 
 signal fuel_changed(amount)
 signal oxygen_changed(amount)
@@ -18,9 +21,17 @@ signal oxygen_changed(amount)
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var screen_width = ProjectSettings.get_setting('display/window/size/viewport_width')
 
-func _ready():
+func emit_current_resources():
 	oxygen_changed.emit(oxygen)
 	fuel_changed.emit(fuel)
+
+func reset_resources():
+	fuel = FUEL_INITIAL_VALUE
+	oxygen = OXYGEN_INITIAL_VALUE
+	emit_current_resources()
+	
+func _ready():
+	emit_current_resources()
 
 func warp_when_offscreen():
 	if position.x > screen_width:
