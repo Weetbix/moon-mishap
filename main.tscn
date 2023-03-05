@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bolbgsnn7j42j"]
+[gd_scene load_steps=7 format=3 uid="uid://bolbgsnn7j42j"]
 
 [ext_resource type="PackedScene" uid="uid://bfhnv54mktux4" path="res://scenes/player.tscn" id="1_46kws"]
 [ext_resource type="Script" path="res://scripts/UI.gd" id="1_br1re"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ktw1e"]
 [ext_resource type="FontFile" uid="uid://ukgt22lrms1e" path="res://fonts/m5x7.ttf" id="2_e8etc"]
 [ext_resource type="PackedScene" uid="uid://drm7mhg74vhl7" path="res://scenes/terrain.tscn" id="2_w28ui"]
 [ext_resource type="PackedScene" uid="uid://c0w5qdlm0gr7u" path="res://scenes/stars.tscn" id="3_ro7l6"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ktw1e")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -25,7 +27,6 @@ offset_bottom = 67.0
 
 [node name="fuel_line" type="Line2D" parent="UI/Fuel"]
 position = Vector2(2.08165e-12, -0.5)
-scale = Vector2(0.5, 1)
 points = PackedVector2Array(0, 0, 100, 2.08165e-12)
 width = 7.0
 
@@ -54,7 +55,6 @@ offset_bottom = 76.0
 
 [node name="line" type="Line2D" parent="UI/Oxygen"]
 position = Vector2(2.08165e-12, -0.5)
-scale = Vector2(0.5, 1)
 points = PackedVector2Array(0, 0, 100, 2.08165e-12)
 width = 7.0
 

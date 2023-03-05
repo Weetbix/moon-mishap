@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name Terrain
 
 @onready var line: Line2D = $line
 @onready var collision: CollisionPolygon2D = $static_body/collision

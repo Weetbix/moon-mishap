@@ -12,8 +12,15 @@ const OXYGEN_REDUCTION_PER_FRAME : float = 0.03
 var fuel = 100
 var oxygen = 100
 
+signal fuel_changed(amount)
+signal oxygen_changed(amount)
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var screen_width = ProjectSettings.get_setting('display/window/size/viewport_width')
+
+func _ready():
+	oxygen_changed.emit(oxygen)
+	fuel_changed.emit(fuel)
 
 func warp_when_offscreen():
 	if position.x > screen_width:
@@ -25,6 +32,7 @@ func _physics_process(_delta):
 	warp_when_offscreen()
 
 	oxygen = max(0, oxygen - OXYGEN_REDUCTION_PER_FRAME)
+	oxygen_changed.emit(oxygen)
 
 	# Rotation
 	var rotate_amount = Input.get_action_strength("rotate-left") - Input.get_action_strength("rotate-right")
@@ -41,5 +49,6 @@ func _physics_process(_delta):
 			var thrust = Vector2(0, -THRUST_AMOUNT) * thruster_amount
 			apply_force(thrust.rotated(rotation))
 			fuel -= FUEL_REDUCTION_PER_FRAME
+			fuel_changed.emit(fuel)
 			flame.visible = true
 			particles.emitting = true;
