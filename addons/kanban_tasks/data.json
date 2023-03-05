@@ -1,0 +1,81 @@
+{
+	"categories": [
+		{
+			"uuid": "f28fe821-6400-4dad-8bf5-f3254ad18bd7",
+			"title": "Task",
+			"color": "70bafa"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "ed8dfc6d-2b60-497e-9b29-0158d063353a",
+			"title": "Todo",
+			"tasks": [
+				"db3a11a7-d2a2-48cf-8865-ae2fdc50fff4",
+				"ab6a194c-6919-4d36-bb3c-7cae266094df",
+				"9f4fcad2-1241-426a-a6c4-338563ad53d2",
+				"f6e8e494-bc6c-409d-bec4-88c161103b4c",
+				"5a296dbb-f183-4348-a5d2-a3ef295373d7"
+			]
+		},
+		{
+			"uuid": "13c708bb-af20-4542-9610-7a2b67cf59b2",
+			"title": "Doing",
+			"tasks": [
+
+			]
+		},
+		{
+			"uuid": "5a12a368-e31c-48bd-9a20-430af81dfee9",
+			"title": "Done",
+			"tasks": [
+
+			]
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "db3a11a7-d2a2-48cf-8865-ae2fdc50fff4",
+			"title": "win condition",
+			"description": "",
+			"category": "f28fe821-6400-4dad-8bf5-f3254ad18bd7"
+		},
+		{
+			"uuid": "ab6a194c-6919-4d36-bb3c-7cae266094df",
+			"title": "win condition x2",
+			"description": "",
+			"category": "f28fe821-6400-4dad-8bf5-f3254ad18bd7"
+		},
+		{
+			"uuid": "9f4fcad2-1241-426a-a6c4-338563ad53d2",
+			"title": "dont generate platforms next to each other",
+			"description": "",
+			"category": "f28fe821-6400-4dad-8bf5-f3254ad18bd7"
+		},
+		{
+			"uuid": "f6e8e494-bc6c-409d-bec4-88c161103b4c",
+			"title": "add velocity etc to ui",
+			"description": "",
+			"category": "f28fe821-6400-4dad-8bf5-f3254ad18bd7"
+		},
+		{
+			"uuid": "5a296dbb-f183-4348-a5d2-a3ef295373d7",
+			"title": "blow up ship when crashing",
+			"description": "",
+			"category": "f28fe821-6400-4dad-8bf5-f3254ad18bd7"
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"ed8dfc6d-2b60-497e-9b29-0158d063353a"
+			],
+			[
+				"13c708bb-af20-4542-9610-7a2b67cf59b2"
+			],
+			[
+				"5a12a368-e31c-48bd-9a20-430af81dfee9"
+			]
+		]
+	}
+}
