@@ -10,8 +10,6 @@
 position = Vector2(1, 0)
 script = ExtResource("1_ktw1e")
 
-[node name="UI" parent="." instance=ExtResource("2_ng0g3")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
@@ -21,3 +19,6 @@ position = Vector2(81, 77)
 [node name="Terrain" parent="." instance=ExtResource("2_w28ui")]
 
 [node name="Stars" parent="." instance=ExtResource("3_ro7l6")]
+
+[node name="UI" parent="." instance=ExtResource("2_ng0g3")]
+z_index = 5

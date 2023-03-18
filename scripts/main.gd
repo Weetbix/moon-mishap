@@ -28,8 +28,14 @@ func place_platform(position: Vector2, difficulty):
 	self.add_child(new_platform)
 
 func did_land(difficulty):
-	print("DID LAND!")
-	print(difficulty)
+	# pause game
+	# show win screen
+	# advanced on space bar
+	pass
+
+func advance_level():
+	mission = mission + 1
+	generate_level()
 
 func generate_level():
 	delete_all_platforms()

@@ -126,3 +126,34 @@ offset_right = 129.0
 offset_bottom = 39.0
 border_color = Color(1, 1, 1, 1)
 editor_only = false
+
+[node name="WinBox" type="ReferenceRect" parent="."]
+offset_left = 220.0
+offset_top = 200.0
+offset_right = 437.0
+offset_bottom = 305.0
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="WinBox"]
+z_index = -1
+layout_mode = 0
+offset_right = 217.0
+offset_bottom = 105.0
+color = Color(0, 0, 0, 1)
+
+[node name="MissionText" type="RichTextLabel" parent="WinBox"]
+texture_filter = 1
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 202.0
+offset_bottom = 112.0
+theme_override_fonts/normal_font = ExtResource("2_rnlpe")
+bbcode_enabled = true
+text = "[center]
+Congratulations PILOT 0435 you have successfully completed MISSION 0435
+
+Resource bonus recieved: XXX
+
+Eject to continue simulation
+[/center]"
