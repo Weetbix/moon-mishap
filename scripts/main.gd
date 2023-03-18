@@ -2,6 +2,8 @@
 extends Node2D
 
 var landing_pad = preload("res://scenes/landing_pad.tscn")
+var score: int = 0
+var mission: int = 1
 
 @onready var ui: UI = $UI
 @onready var terrain: Terrain = $Terrain	
@@ -18,11 +20,16 @@ func delete_all_platforms():
 		platform.queue_free()
 
 func place_platform(position: Vector2, difficulty):
-	print(position)
-	var new_platform = landing_pad.instantiate()
+	var new_platform : LandingPad = landing_pad.instantiate()
 	new_platform.add_to_group('platforms')
 	new_platform.position = position
+	new_platform.difficulty = difficulty
+	new_platform.did_land.connect(did_land)
 	self.add_child(new_platform)
+
+func did_land(difficulty):
+	print("DID LAND!")
+	print(difficulty)
 
 func generate_level():
 	delete_all_platforms()
@@ -38,6 +45,8 @@ func _ready():
 	if not Engine.is_editor_hint():
 		player.fuel_changed.connect(ui.updateFuel)
 		player.oxygen_changed.connect(ui.updateOxygen)
+		ui.updateScore(score)
+		ui.updateMission(mission)
 		generate_level()
 
 func _process(delta):

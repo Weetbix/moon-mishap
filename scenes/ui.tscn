@@ -10,6 +10,44 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_e3t48")
 
+[node name="Score" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 54.0
+offset_right = 140.0
+offset_bottom = 94.0
+
+[node name="Mission" type="RichTextLabel" parent="Score"]
+texture_filter = 1
+offset_left = -37.0
+offset_top = -11.0
+offset_right = 28.0
+offset_bottom = 9.0
+theme_override_fonts/normal_font = ExtResource("2_rnlpe")
+text = "00
+"
+
+[node name="MissionText" type="RichTextLabel" parent="Score"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -69.0
+offset_top = -11.0
+offset_right = -4.0
+offset_bottom = 9.0
+theme_override_fonts/normal_font = ExtResource("2_rnlpe")
+text = "MISS"
+
+[node name="Score" type="RichTextLabel" parent="Score"]
+texture_filter = 1
+offset_left = 3.0
+offset_top = -11.0
+offset_right = 76.0
+offset_bottom = 9.0
+theme_override_fonts/normal_font = ExtResource("2_rnlpe")
+text = "00000000
+"
+
 [node name="Fuel" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -72,5 +110,19 @@ offset_left = 27.0
 offset_top = 19.0
 offset_right = 156.0
 offset_bottom = 43.0
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ReferenceRect"]
+offset_top = 24.0
+offset_right = 51.0
+offset_bottom = 39.0
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="ReferenceRect"]
+offset_top = 24.0
+offset_right = 129.0
+offset_bottom = 39.0
 border_color = Color(1, 1, 1, 1)
 editor_only = false
