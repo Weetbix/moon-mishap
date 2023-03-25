@@ -29,19 +29,11 @@ func reset_resources():
 	fuel = FUEL_INITIAL_VALUE
 	oxygen = OXYGEN_INITIAL_VALUE
 	emit_current_resources()
-	
+
 func _ready():
 	emit_current_resources()
 
-func warp_when_offscreen():
-	if position.x > screen_width:
-		position.x = 0
-	elif position.x < 0:
-		position.x = screen_width
-
 func _physics_process(_delta):
-	warp_when_offscreen()
-
 	oxygen = max(0, oxygen - OXYGEN_REDUCTION_PER_FRAME)
 	oxygen_changed.emit(oxygen)
 
@@ -63,3 +55,14 @@ func _physics_process(_delta):
 			fuel_changed.emit(fuel)
 			flame.visible = true
 			particles.emitting = true;
+
+func _integrate_forces(state):
+	var xform = state.get_transform()
+
+	# Warp when off screen
+	if xform.origin.x > screen_width:
+		xform.origin.x = 0
+	elif xform.origin.x < 0:
+		xform.origin.x = screen_width
+
+	state.set_transform(xform)

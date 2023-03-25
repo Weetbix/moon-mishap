@@ -15,11 +15,6 @@ var user_interaction_enabled: bool = true
 	set(val):
 		generate_level()
 
-func _input(event):
-	if event.is_action_pressed("eject"):
-		if not user_interaction_enabled:
-			advance_level()
-
 func delete_all_platforms():
 	var platforms = get_tree().get_nodes_in_group('platforms')
 	for platform in platforms:
@@ -44,10 +39,10 @@ func advance_level():
 	generate_level()
 
 func generate_level():
-	randomize_player_position()
 	delete_all_platforms()
 	terrain.generate()
 	player.reset_resources()
+	randomize_player_position()
 
 func randomize_player_position():
 	var margin: int = 40
@@ -78,3 +73,7 @@ func _process(delta):
 	if not Engine.is_editor_hint():
 		if Input.is_action_just_pressed("debug_generate_level"):
 			generate_level()
+
+		if Input.is_action_just_pressed("eject"):
+			if not user_interaction_enabled:
+				advance_level()
