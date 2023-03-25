@@ -28,12 +28,19 @@ func place_platform(position: Vector2, difficulty):
 	new_platform.did_land.connect(did_land)
 	self.add_child(new_platform)
 
+func score_from_level(difficulty):
+	return player.fuel * player.oxygen * difficulty
+
 func did_land(difficulty):
 	user_interaction_enabled = false
+	score += score_from_level(difficulty)
+	ui.updateScore(score)
+	ui.updateScoreFromLevel(score_from_level(difficulty))
 	ui.levelCompleted()
 
 func advance_level():
 	mission = mission + 1
+	ui.updateMission(mission)
 	user_interaction_enabled = true
 	ui.levelStarted()
 	generate_level()

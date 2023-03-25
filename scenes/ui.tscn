@@ -147,7 +147,7 @@ offset_right = 217.0
 offset_bottom = 105.0
 color = Color(0, 0, 0, 1)
 
-[node name="MissionText" type="RichTextLabel" parent="WinBox"]
+[node name="WinBoxText" type="RichTextLabel" parent="WinBox"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 16.0

@@ -6,9 +6,21 @@ class_name UI
 @onready var score: RichTextLabel = $Score/Score
 @onready var mission: RichTextLabel = $Score/Mission
 @onready var winBox: Node = $WinBox
+@onready var winBoxText: RichTextLabel = $WinBox/WinBoxText
+
+var winBox_text = "[center]
+Congratulations PILOT 0435 you have successfully completed MISSION %s
+
+Resource bonus recieved: %d
+
+Eject to continue simulation
+[/center]"
 
 func updateScore(amount: int):
 	score.text = "%08d" % amount
+
+func updateScoreFromLevel(amount: int):
+	winBoxText.text = winBox_text % [mission.text, amount]
 
 func updateMission(number: int):
 	mission.text = "%02d" % number
