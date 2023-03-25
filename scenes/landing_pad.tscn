@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsijswbbyrigf"]
+[gd_scene load_steps=5 format=3 uid="uid://dsijswbbyrigf"]
 
 [ext_resource type="Script" path="res://scripts/landing_pad.gd" id="1_v4w8e"]
+[ext_resource type="FontFile" uid="uid://ukgt22lrms1e" path="res://fonts/m5x7.ttf" id="2_d6x8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbjf8"]
 
@@ -29,6 +30,15 @@ debug_color = Color(0.639216, 0.513726, 0.27451, 0.419608)
 [node name="LandingTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="DifficultyText" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = -10.0
+offset_top = 5.0
+offset_right = 63.0
+offset_bottom = 25.0
+theme_override_fonts/normal_font = ExtResource("2_d6x8y")
+text = "x1.0"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
