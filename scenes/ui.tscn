@@ -20,6 +20,7 @@ offset_bottom = 94.0
 
 [node name="Mission" type="RichTextLabel" parent="Score"]
 texture_filter = 1
+layout_mode = 0
 offset_left = -37.0
 offset_top = -11.0
 offset_right = 28.0
@@ -40,6 +41,7 @@ text = "MISS"
 
 [node name="Score" type="RichTextLabel" parent="Score"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 3.0
 offset_top = -11.0
 offset_right = 76.0
@@ -114,6 +116,7 @@ border_color = Color(1, 1, 1, 1)
 editor_only = false
 
 [node name="ReferenceRect" type="ReferenceRect" parent="ReferenceRect"]
+layout_mode = 0
 offset_top = 24.0
 offset_right = 51.0
 offset_bottom = 39.0
@@ -121,6 +124,7 @@ border_color = Color(1, 1, 1, 1)
 editor_only = false
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="ReferenceRect"]
+layout_mode = 0
 offset_top = 24.0
 offset_right = 129.0
 offset_bottom = 39.0
@@ -128,6 +132,7 @@ border_color = Color(1, 1, 1, 1)
 editor_only = false
 
 [node name="WinBox" type="ReferenceRect" parent="."]
+layout_mode = 0
 offset_left = 220.0
 offset_top = 200.0
 offset_right = 437.0
@@ -144,6 +149,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="MissionText" type="RichTextLabel" parent="WinBox"]
 texture_filter = 1
+layout_mode = 0
 offset_left = 16.0
 offset_top = -8.0
 offset_right = 202.0

@@ -4,6 +4,7 @@ extends Node2D
 var landing_pad = preload("res://scenes/landing_pad.tscn")
 var score: int = 0
 var mission: int = 1
+var user_interaction_enabled: bool = true
 
 @onready var ui: UI = $UI
 @onready var terrain: Terrain = $Terrain	
@@ -28,8 +29,8 @@ func place_platform(position: Vector2, difficulty):
 	self.add_child(new_platform)
 
 func did_land(difficulty):
-	# pause game
-	# show win screen
+	user_interaction_enabled = false
+	ui.levelCompleted()
 	# advanced on space bar
 	pass
 
@@ -53,6 +54,7 @@ func _ready():
 		player.oxygen_changed.connect(ui.updateOxygen)
 		ui.updateScore(score)
 		ui.updateMission(mission)
+		ui.levelStarted()
 		generate_level()
 
 func _process(delta):

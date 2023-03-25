@@ -5,6 +5,7 @@ class_name UI
 @onready var oxygen_bar: Node2D = $Oxygen/line
 @onready var score: RichTextLabel = $Score/Score
 @onready var mission: RichTextLabel = $Score/Mission
+@onready var winBox: Node = $WinBox
 
 func updateScore(amount: int):
 	score.text = "%08d" % amount
@@ -17,3 +18,9 @@ func updateFuel(amount):
 
 func updateOxygen(amount):
 	oxygen_bar.scale.x = amount / 100.0
+
+func levelCompleted():
+	winBox.visible = true
+
+func levelStarted():
+	winBox.visible = false
