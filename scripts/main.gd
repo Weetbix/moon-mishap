@@ -15,6 +15,11 @@ var user_interaction_enabled: bool = true
 	set(val):
 		generate_level()
 
+func _input(event):
+	if event.is_action_pressed("eject"):
+		if not user_interaction_enabled:
+			advance_level()
+
 func delete_all_platforms():
 	var platforms = get_tree().get_nodes_in_group('platforms')
 	for platform in platforms:
@@ -31,17 +36,29 @@ func place_platform(position: Vector2, difficulty):
 func did_land(difficulty):
 	user_interaction_enabled = false
 	ui.levelCompleted()
-	# advanced on space bar
-	pass
 
 func advance_level():
 	mission = mission + 1
+	user_interaction_enabled = true
+	ui.levelStarted()
 	generate_level()
 
 func generate_level():
+	randomize_player_position()
 	delete_all_platforms()
 	terrain.generate()
 	player.reset_resources()
+
+func randomize_player_position():
+	var margin: int = 40
+	var max_distance_from_top: int = 150
+	player.position = Vector2(
+		randi_range(margin, ProjectSettings.get_setting('display/window/size/viewport_width') - margin),
+		randi_range(margin, max_distance_from_top)
+	)
+	player.rotation_degrees = randf_range(-90, 90)
+	player.linear_velocity = Vector2(0,-randf_range(5,20)).rotated(player.rotation)
+	player.angular_velocity = randf_range(-2, 2)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
