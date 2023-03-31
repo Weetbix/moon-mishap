@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://wc7c2ns4wfj5"]
+
+[ext_resource type="Texture2D" uid="uid://bfkxtqfbhppxf" path="res://images/explosion_1.png" id="1_dbpj6"]
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_u5gwu"]
+[ext_resource type="PackedScene" uid="uid://ds7cdpyvdvusq" path="res://scenes/auto_remover.tscn" id="2_8bbkc"]
+
+[sub_resource type="Curve" id="Curve_rve2e"]
+max_value = 1.5
+_data = [Vector2(0, 1.01725), 0.0, -0.0379151, 0, 0, Vector2(1, 1.5), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ya443"]
+curve = SubResource("Curve_rve2e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g1o4w"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 88.32
+initial_velocity_max = 125.36
+angular_velocity_min = 86.15
+angular_velocity_max = 135.38
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.1
+linear_accel_max = 24.51
+scale_curve = SubResource("CurveTexture_ya443")
+turbulence_enabled = true
+
+[node name="explosion" type="Node2D"]
+script = ExtResource("1_u5gwu")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_g1o4w")
+texture = ExtResource("1_dbpj6")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+
+[node name="auto_remover" parent="." instance=ExtResource("2_8bbkc")]
