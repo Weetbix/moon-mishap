@@ -73,8 +73,9 @@ func _integrate_forces(state):
 	state.set_transform(xform)
 
 func _on_body_entered(body:Node):
-	var explosion_instance : Node2D = explosion.instantiate()
-	explosion_instance.position = position
-	get_parent().add_child(explosion_instance)
-	is_exploded = true
-	exploded.emit()
+	if !is_exploded:
+		var explosion_instance : Node2D = explosion.instantiate()
+		explosion_instance.position = position
+		get_parent().add_child(explosion_instance)
+		is_exploded = true
+		exploded.emit()
