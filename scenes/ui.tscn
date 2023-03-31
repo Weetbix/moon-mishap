@@ -132,6 +132,7 @@ border_color = Color(1, 1, 1, 1)
 editor_only = false
 
 [node name="WinBox" type="ReferenceRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 220.0
 offset_top = 200.0
@@ -147,7 +148,7 @@ offset_right = 217.0
 offset_bottom = 105.0
 color = Color(0, 0, 0, 1)
 
-[node name="WinBoxText" type="RichTextLabel" parent="WinBox"]
+[node name="Text" type="RichTextLabel" parent="WinBox"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 16.0
@@ -162,4 +163,36 @@ Congratulations PILOT 0435 you have successfully completed MISSION 0435
 Resource bonus recieved: XXX
 
 Eject to continue simulation
+[/center]"
+
+[node name="FailBox" type="ReferenceRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 220.0
+offset_top = 200.0
+offset_right = 437.0
+offset_bottom = 305.0
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="FailBox"]
+z_index = -1
+layout_mode = 0
+offset_right = 217.0
+offset_bottom = 105.0
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="RichTextLabel" parent="FailBox"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 202.0
+offset_bottom = 94.0
+theme_override_fonts/normal_font = ExtResource("2_rnlpe")
+bbcode_enabled = true
+text = "[center]
+you have FAILED to complete MISSION 0435 
+
+Eject to RETRY
 [/center]"

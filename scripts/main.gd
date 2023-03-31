@@ -4,7 +4,8 @@ extends Node2D
 var landing_pad = preload("res://scenes/landing_pad.tscn")
 var score: int = 0
 var mission: int = 1
-var user_interaction_enabled: bool = true
+var mission_passed: bool = true
+var mission_failed = false
 
 @onready var ui: UI = $UI
 @onready var terrain: Terrain = $Terrain	
@@ -32,16 +33,23 @@ func score_from_level(difficulty):
 	return player.fuel * player.oxygen * difficulty
 
 func did_land(difficulty):
-	user_interaction_enabled = false
+	mission_passed = true
 	score += score_from_level(difficulty)
 	ui.updateScore(score)
 	ui.updateScoreFromLevel(score_from_level(difficulty))
 	ui.levelCompleted()
 
+func did_crash():
+	mission_failed = true
+	ui.levelFailed()
+
 func advance_level():
-	mission = mission + 1
-	ui.updateMission(mission)
-	user_interaction_enabled = true
+	if !mission_failed:
+		mission = mission + 1
+		ui.updateMission(mission)
+
+	mission_failed = false
+	mission_passed = false
 	ui.levelStarted()
 	generate_level()
 
@@ -71,6 +79,7 @@ func _ready():
 	if not Engine.is_editor_hint():
 		player.fuel_changed.connect(ui.updateFuel)
 		player.oxygen_changed.connect(ui.updateOxygen)
+		player.exploded.connect(did_crash)
 		ui.updateScore(score)
 		ui.updateMission(mission)
 		ui.levelStarted()
@@ -82,5 +91,5 @@ func _process(delta):
 			generate_level()
 
 		if Input.is_action_just_pressed("eject"):
-			if not user_interaction_enabled:
+			if mission_failed || mission_passed:
 				advance_level()

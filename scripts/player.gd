@@ -32,6 +32,7 @@ func emit_current_resources():
 func reset_resources():
 	fuel = FUEL_INITIAL_VALUE
 	oxygen = OXYGEN_INITIAL_VALUE
+	is_exploded = false
 	emit_current_resources()
 
 func _ready():
