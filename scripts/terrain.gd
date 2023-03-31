@@ -40,29 +40,43 @@ func generate_collision_polygon():
 	polygon.append(Vector2(0, TERRAIN_HEIGHT))
 	return polygon
 
-func find_smoothest_point(points: PackedVector2Array):
+func find_smoothest_point(points: PackedVector2Array, invalid_point_indexes: Array):
 	var smoothest_index = 1
 	var smoothest_value = 10000
 
 	for i in range(1, points.size() -3):
-		var difference_in_neighours = abs(points[i].y - points[i-1].y) + abs(points[i].y - points[i+1].y)
-		if difference_in_neighours < smoothest_value:
-			smoothest_index = i
-			smoothest_value = difference_in_neighours
+		# How many points on either side of an invalid point to ignore
+		const INVALID_POINT_BUFFER = 5
+		var is_valid_index = !invalid_point_indexes.any(
+			func(index): return (i > index - INVALID_POINT_BUFFER) && (i < index + INVALID_POINT_BUFFER)
+		)
+
+		if is_valid_index:
+			var difference_in_neighours = abs(points[i].y - points[i-1].y) + abs(points[i].y - points[i+1].y)
+			if difference_in_neighours < smoothest_value:
+				smoothest_index = i
+				smoothest_value = difference_in_neighours
 	
 	return smoothest_index
 
-func find_jankiest_point(points: PackedVector2Array):
+func find_jankiest_point(points: PackedVector2Array, invalid_point_indexes: Array):
 	var jankiest_index = 1
 	var jankiest_value = -1000
 
 	for i in range(1, points.size() -3):
-		# Jank value is like deep caves, so lets find the point where the height difference
-		# of both neighbours adds up to the most
-		var jank_amount = (points[i-1].y + points[i].y) + (points[i+1].y + points[i].y)
-		if jank_amount > jankiest_value:
-			jankiest_index = i
-			jankiest_value = jank_amount
+		# How many points on either side of an invalid point to ignore
+		const INVALID_POINT_BUFFER = 5
+		var is_valid_index = !invalid_point_indexes.any(
+			func(index): return (i > index - INVALID_POINT_BUFFER) && (i < index + INVALID_POINT_BUFFER)
+		)
+
+		if is_valid_index:
+			# Jank value is like deep caves, so lets find the point where the height difference
+			# of both neighbours adds up to the most
+			var jank_amount = (points[i-1].y + points[i].y) + (points[i+1].y + points[i].y)
+			if jank_amount > jankiest_value:
+				jankiest_index = i
+				jankiest_value = jank_amount
 	
 	return jankiest_index
 
@@ -87,8 +101,9 @@ func create_platform(terrain: PackedVector2Array, index: int, color: Color):
 func generate():
 	var terrain_array = generate_collision_polygon();
 
-	var smoothest_point = find_smoothest_point(terrain_array)
-	var jankiest_point = find_jankiest_point(terrain_array)
+	var smoothest_point = find_smoothest_point(terrain_array, [0, TERRAIN_X_POINTS])
+
+	var jankiest_point = find_jankiest_point(terrain_array, [0, TERRAIN_X_POINTS, smoothest_point])
 
 	make_neighbours_flat(
 		terrain_array,
