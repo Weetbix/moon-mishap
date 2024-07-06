@@ -12,10 +12,10 @@ signal did_land(difficulty: float)
 func _ready() -> void:
 	difficultyText.text = "x%.1f" % difficulty
 
-func _on_area_entered() -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	landingTimer.start()
 
-func _on_area_exited() -> void:
+func _on_area_exited(_area: Area2D) -> void:
 	landingTimer.stop()
 
 func _on_landing_timer_timeout() -> void:

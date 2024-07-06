@@ -67,7 +67,7 @@ func randomize_player_position() -> void:
 		randi_range(margin, width - margin),
 		randi_range(margin, max_distance_from_top)
 	)
-	player.rotation_degrees = randf_range( - 90, 90)
+	player.rotation_degrees = randf_range( - 45, 45)
 	player.linear_velocity = Vector2(0, -randf_range(5, 20)).rotated(player.rotation)
 	player.angular_velocity = randf_range( - 2, 2)
 
