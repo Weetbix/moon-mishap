@@ -4,6 +4,7 @@ class_name Player
 @onready var flame: Node2D = $flame
 @onready var particles: GPUParticles2D = $particles
 @onready var landingAreaCollider: Area2D = $LandingAreaCollider
+@onready var thrusterSound: AudioStreamPlayer2D = $ThrusterSound
 
 var explosion := preload ("res://scenes/explosion.tscn")
 
@@ -66,6 +67,12 @@ func _physics_process(_delta: float) -> void:
 				fuel_changed.emit(fuel)
 				flame.visible = true
 				particles.emitting = true;
+				if !thrusterSound.playing:
+					thrusterSound.play()
+			else:
+				if thrusterSound.playing:
+					thrusterSound.stop()
+
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var xform := state.get_transform()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfhnv54mktux4"]
+[gd_scene load_steps=10 format=3 uid="uid://bfhnv54mktux4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_k0q34"]
 [ext_resource type="Texture2D" uid="uid://dcnbiibr6lucf" path="res://images/lander.png" id="2_wow2q"]
 [ext_resource type="SpriteFrames" uid="uid://cqoyonxh03lys" path="res://images/flame.res" id="3_16rsr"]
 [ext_resource type="Texture2D" uid="uid://b6hk01034qmvp" path="res://images/lander-hd.png" id="4_cfgt2"]
+[ext_resource type="AudioStream" uid="uid://7lof2kwlx36u" path="res://sounds/qubodupFireLoop.ogg" id="5_eimrx"]
 
 [sub_resource type="Gradient" id="Gradient_5a623"]
 offsets = PackedFloat32Array(0.266075, 0.292683)
@@ -79,5 +80,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LandingAreaCollider"]
 position = Vector2(-2.08165e-12, -2.08165e-12)
 shape = SubResource("RectangleShape2D_dttuj")
+
+[node name="ThrusterSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_eimrx")
+autoplay = true
+playback_type = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
