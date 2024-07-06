@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://wc7c2ns4wfj5"]
+[gd_scene load_steps=13 format=3 uid="uid://wc7c2ns4wfj5"]
 
 [ext_resource type="Script" path="res://scripts/explosion.gd" id="1_u5gwu"]
 [ext_resource type="PackedScene" uid="uid://ds7cdpyvdvusq" path="res://scenes/auto_remover.tscn" id="2_8bbkc"]
 [ext_resource type="Texture2D" uid="uid://c3ybcu1k1ky0p" path="res://images/ring_1.png" id="2_muqh1"]
+[ext_resource type="AudioStream" uid="uid://bd0j16at2wxwu" path="res://sounds/rlaunch.wav" id="4_ahi4t"]
 
 [sub_resource type="Image" id="Image_dtatr"]
 data = {
@@ -78,3 +79,7 @@ lifetime = 0.25
 one_shot = true
 
 [node name="auto_remover" parent="." instance=ExtResource("2_8bbkc")]
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ahi4t")
+autoplay = true
