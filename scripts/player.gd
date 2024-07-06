@@ -55,11 +55,14 @@ func _physics_process(_delta: float) -> void:
 	flame.visible = false
 	particles.emitting = false;
 
-	if !is_exploded:
-		# Thrust
-		if fuel > 0:
-			var thruster_amount := Input.get_action_strength("thruster")
+	var thruster_amount := Input.get_action_strength("thruster")
 
+	if thruster_amount <= 0 || is_exploded || fuel == 0:
+		if thrusterSound.playing:
+			thrusterSound.stop()
+
+	if !is_exploded:
+		if fuel > 0:
 			if thruster_amount > 0:
 				var thrust := Vector2(0, -THRUST_AMOUNT) * thruster_amount
 				apply_force(thrust.rotated(rotation))
@@ -69,10 +72,6 @@ func _physics_process(_delta: float) -> void:
 				particles.emitting = true;
 				if !thrusterSound.playing:
 					thrusterSound.play()
-			else:
-				if thrusterSound.playing:
-					thrusterSound.stop()
-
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var xform := state.get_transform()
@@ -93,7 +92,7 @@ func isLandingTooFast() -> bool:
 
 func _on_body_entered(_body: Node) -> void:
 	if !is_exploded:
-		if isLanding() and isLandingTooFast():
+		if !isLanding() or isLandingTooFast():
 			var explosion_instance: Node2D = explosion.instantiate()
 			explosion_instance.position = position
 			get_parent().add_child(explosion_instance)
