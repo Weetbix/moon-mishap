@@ -6,17 +6,17 @@ class_name LandingPad
 @onready var difficultyText: RichTextLabel = $DifficultyText
 
 var difficulty : float
-signal did_land(difficulty)
+signal did_land(difficulty: float)
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	difficultyText.text = "x%.1f" % difficulty
 
-func _on_area_entered(body:Node2D):
+func _on_area_entered() -> void:
 	landingTimer.start()
 
-func _on_area_exited(body:Node2D):
+func _on_area_exited() -> void:
 	landingTimer.stop()
 
-func _on_landing_timer_timeout():
+func _on_landing_timer_timeout() -> void:
 	did_land.emit(1.0)
