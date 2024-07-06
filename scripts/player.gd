@@ -47,11 +47,6 @@ func _physics_process(_delta: float) -> void:
 	isLandingTooFast()
 	oxygen = max(0, oxygen - OXYGEN_REDUCTION_PER_FRAME)
 	oxygen_changed.emit(oxygen)
-
-	# Rotation
-	var rotate_amount := Input.get_action_strength("rotate-left") - Input.get_action_strength("rotate-right")
-	apply_torque( - rotate_amount * ROTATE_SPEED)
-
 	flame.visible = false
 	particles.emitting = false;
 
@@ -63,6 +58,10 @@ func _physics_process(_delta: float) -> void:
 
 	if !is_exploded:
 		if fuel > 0:
+			# Rotation
+			var rotate_amount := Input.get_action_strength("rotate-left") - Input.get_action_strength("rotate-right")
+			apply_torque( - rotate_amount * ROTATE_SPEED)
+
 			if thruster_amount > 0:
 				var thrust := Vector2(0, -THRUST_AMOUNT) * thruster_amount
 				apply_force(thrust.rotated(rotation))
