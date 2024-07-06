@@ -3,6 +3,7 @@ class_name Player
 
 @onready var flame: Node2D = $flame
 @onready var particles: GPUParticles2D = $particles
+@onready var landingAreaCollider: Area2D = $LandingAreaCollider
 
 var explosion := preload ("res://scenes/explosion.tscn")
 
@@ -13,6 +14,9 @@ const FUEL_INITIAL_VALUE = 100
 const OXYGEN_INITIAL_VALUE = 100
 const FUEL_REDUCTION_PER_FRAME: float = 0.1
 const OXYGEN_REDUCTION_PER_FRAME: float = 0.03
+
+const CRASH_MAX_ANGULAR_VELOCITY := 0.1;
+const CRASH_MAX_LINEAR_VELOCITY := 3;
 
 var fuel: float = FUEL_INITIAL_VALUE
 var oxygen: float = OXYGEN_INITIAL_VALUE
@@ -39,6 +43,7 @@ func _ready() -> void:
 	emit_current_resources()
 
 func _physics_process(_delta: float) -> void:
+	isLandingTooFast()
 	oxygen = max(0, oxygen - OXYGEN_REDUCTION_PER_FRAME)
 	oxygen_changed.emit(oxygen)
 
@@ -73,10 +78,17 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 	state.set_transform(xform)
 
-func _on_body_entered(body: Node) -> void:
+func isLanding() -> bool:
+	return landingAreaCollider.has_overlapping_areas();
+
+func isLandingTooFast() -> bool:
+	return (abs(self.angular_velocity) > CRASH_MAX_ANGULAR_VELOCITY) or (self.linear_velocity.length() > CRASH_MAX_LINEAR_VELOCITY)
+
+func _on_body_entered(_body: Node) -> void:
 	if !is_exploded:
-		var explosion_instance: Node2D = explosion.instantiate()
-		explosion_instance.position = position
-		get_parent().add_child(explosion_instance)
-		is_exploded = true
-		exploded.emit()
+		if isLanding() and isLandingTooFast():
+			var explosion_instance: Node2D = explosion.instantiate()
+			explosion_instance.position = position
+			get_parent().add_child(explosion_instance)
+			is_exploded = true
+			exploded.emit()

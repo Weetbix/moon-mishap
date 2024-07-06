@@ -33,11 +33,12 @@ func score_from_level(difficulty: float) -> float:
 	return player.fuel * player.oxygen * difficulty
 
 func did_land(difficulty: float) -> void:
-	mission_passed = true
-	score += score_from_level(difficulty)
-	ui.updateScore(score)
-	ui.updateScoreFromLevel(score_from_level(difficulty))
-	ui.levelCompleted()
+	if !mission_failed:
+		mission_passed = true
+		score += score_from_level(difficulty)
+		ui.updateScore(score)
+		ui.updateScoreFromLevel(score_from_level(difficulty))
+		ui.levelCompleted()
 
 func did_crash() -> void:
 	mission_failed = true
